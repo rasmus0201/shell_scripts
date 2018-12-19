@@ -12,7 +12,7 @@ if [ $(id -u) -eq 0 ]; then
             IFS=: read -r username password <<< "$line" #split line by ":" and store vars
             
             #check if user exists
-            egrep "^$username" /etc/passwd >/dev/null 
+            grep -E "^$username" /etc/passwd >/dev/null 
             if [ $? -eq 0 ]; then
                 echo "$username exists!"
             else
@@ -27,7 +27,7 @@ if [ $(id -u) -eq 0 ]; then
     else
         #enter username
         read -p "Enter username: " username
-        egrep "^$username" /etc/passwd >/dev/null
+        grep -E "^$username" /etc/passwd >/dev/null
         
         #check if user exists
         if [ $? -eq 0 ]; then
